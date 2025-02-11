@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Animate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        canvas {
+            border: 2px solid black;
+            background-color: white;
+            margin-top: 20px;
+        }
+        .controls {
+            margin: 20px;
+        }
+        button, input {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        input[type="range"] {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Space Animate!</h1>
+    <p>Experiment with animation speeds and loops!</p>
+    <div class="controls">
+        <label for="fps">Frames per second:</label>
+        <input type="range" id="fps" value="10" min="1" max="60" oninput="updateFpsDisplay()">
+        <span id="fpsValue">10</span>
+        <button id= "StartButton" onclick="startAnimation()">Start Animation</button>
+        <button onclick="pauseAnimation()">Pause</button>
+        <button onclick="clearCanvas()">Clear</button>
+    </div>
+    <canvas id="canvas" width="500" height="300"></canvas>
+    
+    <script>
+        let button = document.getElementById("StartButton")
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let animationFrame;
+        let isPaused = false;
+        let x = 50;
+        let angle = 0;
+        let fps = 10;
+        let interval = 1000 / fps;
+        let lastTime = 0;
+
+        let sprite = new Image();
+        sprite.src = 'images/sprite1.png'; // Ensure this file is in the repository
+
+        let background = new Image();
+        background.src = 'images/background.jpg'; // Ensure this file is in the repository
+        let backgroundLoaded = false;
+
+        background.onload = () => {
+            backgroundLoaded = true;
+        };
+
+        function updateFpsDisplay() {
+            fps = parseInt(document.getElementById('fps').value);
+            document.getElementById('fpsValue').innerText = fps;
+            interval = 1000 / fps;
+        }
+
+        function clearCanvas() {
+            cancelAnimationFrame(animationFrame);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            x = 50;
+            angle = 0;
+        }
+
+        function startAnimation() {
+            button.disabled = true;
+            isPaused = false;
+            lastTime = 0;
+
+            function animate(time) {
+                if (isPaused) return;
+                if (time - lastTime > interval) {
+                    lastTime = time;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Ensure background is loaded before drawing it
+                    if (backgroundLoaded) {
+                        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+                    }
+
+                    ctx.save();
+                    ctx.translate(x, 150);
+                    ctx.rotate(angle * Math.PI / 180);
+                    ctx.drawImage(sprite, -50, -50, 100, 100); // Bigger sprite size
+                    ctx.restore();
+                    angle = (angle + 10) % 360;
+                    x = (x + 5) % canvas.width; // Moves across the canvas
+                }
+                animationFrame = requestAnimationFrame(animate);
+            }
+
+            animationFrame = requestAnimationFrame(animate);
+        }
+
+        function pauseAnimation() {
+            isPaused = true;
+            button.disabled = false;
+        }
+    </script>
+</body>
+</html>
