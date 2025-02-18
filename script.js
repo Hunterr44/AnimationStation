@@ -31,6 +31,7 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     x = 50;
     angle = 0;
+    button.disabled = false;
 }
 
 function startAnimation() {
