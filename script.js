@@ -27,6 +27,7 @@ function updateFpsDisplay() {
 }
 
 function clearCanvas() {
+    button.disabled = false;
     cancelAnimationFrame(animationFrame);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     x = 50;
