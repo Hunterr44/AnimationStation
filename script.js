@@ -28,6 +28,11 @@ const sizeValue = document.getElementById('sizeValue');
 fpsSlider.addEventListener('input', () => {
     fps = parseInt(fpsSlider.value);
     fpsValue.innerText = fps;
+
+    if (!isPaused) {
+        cancelAnimationFrame(animationFrame);
+        playAnimation();
+    }
 });
 
 rotationSlider.addEventListener('input', () => {
