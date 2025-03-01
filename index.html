@@ -3,21 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Animate</title>
+    <title>Animation Exploration</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Space Animate!</h1>
-    <p>Experiment with animation speeds and loops!</p>
-    <div class="controls">
-        <label for="fps">Frames per second:</label>
-        <input type="range" id="fps" value="10" min="1" max="60" oninput="updateFpsDisplay()">
-        <span id="fpsValue">10</span>
-        <button id="StartButton" onclick="startAnimation()">Start Animation</button>
-        <button onclick="pauseAnimation()">Pause</button>
-        <button onclick="clearCanvas()">Clear</button>
+    <header>
+        <h1>Digital Flipbook!</h1>
+        <p>Experiment with the variables using the buttons and sliders</p>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Controls -->
+        <aside class="controls">
+            <label for="fps">Frames per second:</label>
+            <input type="range" id="fps" value="5" min="1" max="60" oninput="updateFpsDisplay()">
+            <span id="fpsValue">5</span>
+
+            <label for="rotation">Rotation Speed:</label>
+            <input type="range" id="rotation" value="20" min="0" max="100" oninput="updateRotationSpeed()">
+            <span id="rotationValue">20</span>
+
+            <label for="size">Sprite size:</label>
+            <input type="range" id="size" value="10" min="1" max="100" oninput="updateSpriteSize()">
+            <span id="sizeValue">10</span>
+        </aside>
+
+        <!-- Canvas and Buttons -->
+        <main>
+            <div class="button-group">
+                <button onclick="showBackgroundSelection()">Choose Background</button>
+                <button onclick="showCharacterSelection()">Choose Character</button>
+                <button onclick="startAnimation()">Start Animation</button>
+                <button onclick="pauseAnimation()">Pause</button>
+                <button onclick="clearCanvas()">Clear</button>
+                <button onclick="downloadImage()">Download PNG</button>
+            </div>
+            
+            <canvas id="canvas" width="600" height="350"></canvas>
+        </main>
     </div>
-    <canvas id="canvas" width="500" height="300"></canvas>
+
+    <!-- Background Selection Modal -->
+    <div id="backgroundModal" class="modal">
+        <div class="modal-content">
+            <h2>Choose Your Background</h2>
+            <div class="grid">
+                <img src="public/background.jpg" alt="Space" onclick="setBackground('public/background.jpg')">
+                <img src="public/garden.jpg" alt="Garden" onclick="setBackground('public/garden.jpg')">
+                <img src="public/ocean.jpg" alt="Ocean" onclick="setBackground('public/ocean.jpg')">
+                <img src="public/beach.jpg" alt="Beach" onclick="setBackground('public/beach.jpg')">
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Selection Modal -->
+    <div id="characterModal" class="modal">
+        <div class="modal-content">
+            <h2>Choose Your Character</h2>
+            <div class="grid">
+                <img src="public/sprite1.png" alt="Rocket" onclick="setCharacter('public/sprite1.png')">
+                <img src="public/flower.png" alt="Flower" onclick="setCharacter('public/flower.png')">
+                <img src="public/fish.png" alt="Fish" onclick="setCharacter('public/fish.png')">
+                <img src="public/seashell.png" alt="Seashell" onclick="setCharacter('public/seashell.png')">
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
