@@ -70,7 +70,7 @@ document.addEventListener('click', (event) => {
 });
 
 // Start Animation Function
-function startAnimation() {
+function playAnimation() {
     isPaused = false;
     let lastTime = 0;
     let interval = 1000 / fps;
@@ -127,7 +127,7 @@ function downloadImage() {
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("button[onclick='showBackgroundSelection()']").addEventListener("click", showBackgroundSelection);
     document.querySelector("button[onclick='showCharacterSelection()']").addEventListener("click", showCharacterSelection);
-    document.querySelector("button[onclick='startAnimation()']").addEventListener("click", startAnimation);
+    document.querySelector("button[onclick='playAnimation()']").addEventListener("click", playAnimation);
     document.querySelector("button[onclick='pauseAnimation()']").addEventListener("click", pauseAnimation);
     document.querySelector("button[onclick='clearCanvas()']").addEventListener("click", clearCanvas);
     document.querySelector("button[onclick='downloadImage()']").addEventListener("click", downloadImage);
