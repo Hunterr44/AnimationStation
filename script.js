@@ -110,6 +110,7 @@ function pauseAnimation() {
 
 // Clear Canvas
 function clearCanvas() {
+    isPaused = true;
     cancelAnimationFrame(animationFrame);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
