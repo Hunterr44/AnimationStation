@@ -8,6 +8,10 @@ sprite.src = 'public/sprite1.png'; // Default sprite
 let background = new Image();
 background.src = 'public/background.jpg'; // Default background
 
+
+
+let button = document.getElementById('PlayButton')
+
 let animationFrame;
 let isPaused = false;
 let x = 50;
@@ -76,6 +80,7 @@ document.addEventListener('click', (event) => {
 
 // Start Animation Function
 function playAnimation() {
+    button.disabled = true;
     isPaused = false;
     let lastTime = 0;
     let interval = 1000 / fps;
@@ -109,6 +114,7 @@ function playAnimation() {
 
 // Pause Animation
 function pauseAnimation() {
+    button.disabled = false; 
     isPaused = true;
     cancelAnimationFrame(animationFrame);
 }
