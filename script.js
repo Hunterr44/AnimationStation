@@ -121,6 +121,7 @@ function pauseAnimation() {
 
 // Clear Canvas
 function clearCanvas() {
+    button.disabled = false; 
     isPaused = true;
     cancelAnimationFrame(animationFrame);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
